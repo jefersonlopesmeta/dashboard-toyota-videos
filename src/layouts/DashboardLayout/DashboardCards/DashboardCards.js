@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Avatar,
   Card,
@@ -47,13 +47,23 @@ const useStyles = makeStyles(() => ({
 const DashboardCards = () => {
   const classes = useStyles();
 
-  const cardValues = {
-    totalVideosPendentes: 10,
-    totalVideosProcessando: 20,
-    totalVideosFinalizados: 420,
-    totalVideos: 450,
-    totalRequisicoes: 25
-  };
+  const [cardValues, setCardsValue] = useState({
+    totalVideosPendentes: 0,
+    totalVideosProcessando: 0,
+    totalVideosFinalizados: 0,
+    totalVideos: 0,
+    totalRequisicoes: 0
+  });
+
+  useEffect(() => {
+    setCardsValue({
+      totalVideosPendentes: 10,
+      totalVideosProcessando: 20,
+      totalVideosFinalizados: 420,
+      totalVideos: 450,
+      totalRequisicoes: 25
+    });
+  });
 
   const infoCards = [
     {

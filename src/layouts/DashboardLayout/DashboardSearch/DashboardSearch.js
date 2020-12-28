@@ -4,7 +4,7 @@ import {
   Container,
   TextField,
   makeStyles,
-  Typography
+  Button
 } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
@@ -32,9 +32,8 @@ const DashboardSearch = () => {
 
   return (
     <Container>
-      <Box display="flex" alignItems="center" justifyContent="start" flexWrap="wrap" className={classes.boxPesquisa}>
-        <Typography variant="h6" color="textSecondary">Pesquisar: </Typography>
-        <form className={classes.formPesquisa}>
+      <Box display="flex" alignItems="center" justifyContent="start" className={classes.boxPesquisa}>
+        <form className={classes.formPesquisa} onSubmit={(e) => console.log(e.target.value)}>
           <TextField
             id="date"
             variant="outlined"
@@ -57,6 +56,7 @@ const DashboardSearch = () => {
               shrink: true,
             }}
           />
+          <Button variant="outlined" color="primary">Pesquisar</Button>
         </form>
       </Box>
     </Container>
