@@ -44,7 +44,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const DashboardCard = () => {
+const DashboardCards = () => {
   const classes = useStyles();
 
   const cardValues = {
@@ -116,4 +116,4 @@ const DashboardCard = () => {
   );
 };
 
-export default DashboardCard;
+export default DashboardCards;

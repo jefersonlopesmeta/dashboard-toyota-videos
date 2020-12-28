@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import NavBar from './NavBar';
 import TopBar from './TopBar';
-import DashboardCard from './DashboardCard';
+import DashboardCards from './DashboardCards';
+import DashboardSearch from './DashboardSearch';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +49,8 @@ const DashboardLayout = () => {
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
-            <DashboardCard />
+            <DashboardSearch />
+            <DashboardCards />
           </div>
         </div>
       </div>
