@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Avatar,
   Card,
@@ -44,26 +45,8 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const DashboardCards = () => {
+const DashboardCards = ({ cardValues }) => {
   const classes = useStyles();
-
-  const [cardValues, setCardsValue] = useState({
-    totalVideosPendentes: 0,
-    totalVideosProcessando: 0,
-    totalVideosFinalizados: 0,
-    totalVideos: 0,
-    totalRequisicoes: 0
-  });
-
-  useEffect(() => {
-    setCardsValue({
-      totalVideosPendentes: 10,
-      totalVideosProcessando: 20,
-      totalVideosFinalizados: 420,
-      totalVideos: 450,
-      totalRequisicoes: 25
-    });
-  });
 
   const infoCards = [
     {
@@ -96,9 +79,9 @@ const DashboardCards = () => {
   return (
     <Container>
       <Box display="flex" alignItems="center" justifyContent="space-between" flexWrap="wrap">
-        {infoCards.map((info) => {
+        {infoCards.map((info, index) => {
           return (
-            <Card className={classes.card}>
+            <Card className={classes.card} key={index.toString()}>
               <CardContent>
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                   {info.icon}
@@ -124,6 +107,10 @@ const DashboardCards = () => {
       </Box>
     </Container>
   );
+};
+
+DashboardCards.propTypes = {
+  cardValues: PropTypes.object,
 };
 
 export default DashboardCards;

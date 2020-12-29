@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Box,
   Container,
@@ -27,40 +28,54 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const DashboardSearch = () => {
+const DashboardSearch = ({ buscaDadosPorData }) => {
   const classes = useStyles();
+
+  const [dataInicio, setDataInicio] = useState('2020-01-01');
+  const [dataFim, setDataFim] = useState('2020-12-29');
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    buscaDadosPorData(dataInicio, dataFim);
+  };
 
   return (
     <Container>
       <Box display="flex" alignItems="center" justifyContent="start" className={classes.boxPesquisa}>
-        <form className={classes.formPesquisa} onSubmit={(e) => console.log(e.target.value)}>
+        <form className={classes.formPesquisa} onSubmit={(e) => handleFormSubmit(e)}>
           <TextField
-            id="date"
+            id="dataInicio"
             variant="outlined"
             label="De"
             type="date"
-            defaultValue="2017-05-24"
+            value={dataInicio}
+            onChange={(e) => setDataInicio(e.target.value)}
             className={classes.textField}
             InputLabelProps={{
               shrink: true,
             }}
           />
           <TextField
-            id="date"
+            id="dataFim"
             variant="outlined"
             label="Até"
             type="date"
-            defaultValue="2017-05-24"
+            value={dataFim}
+            onChange={(e) => setDataFim(e.target.value)}
             className={classes.textField}
             InputLabelProps={{
               shrink: true,
             }}
           />
-          <Button variant="outlined" color="primary">Pesquisar</Button>
+          <Button type="submit" variant="outlined" color="primary">Pesquisar</Button>
         </form>
       </Box>
     </Container>
   );
+};
+
+DashboardSearch.propTypes = {
+  buscaDadosPorData: PropTypes.func,
 };
 
 export default DashboardSearch;
