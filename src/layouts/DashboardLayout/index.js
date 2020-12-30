@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import TopBar from './TopBar';
 import DashboardCards from './DashboardCards';
 import DashboardSearch from './DashboardSearch';
+import api from './service/api';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,22 +48,12 @@ const DashboardLayout = () => {
   });
 
   const buscaDadosPorData = async (dataInicio, dataFim) => {
-    const username = 'toyota';
-    const password = 'toyota@2020';
-    const authString = `${username}:${password}`;
-    try {
-      await fetch(`https://videosapi.metabrasil.com.br:3000/api/homologacao/dashboard/totais/${dataInicio}/${dataFim}`, {
-        method: 'GET', Authorization: `Basic ${btoa(authString)}`
+    await api
+      .get(`api/homologacao/dashboard/totais/${dataInicio}/${dataFim}`)
+      .then((res) => {
+        setCardsValue(res.data);
       })
-        .then((res) => {
-          if (!res.ok) throw res;
-
-          return res.json();
-        })
-        .then((json) => setCardsValue(json));
-    } catch (error) {
-      console.log(error);
-    }
+      .catch((error) => console.log(error));
   };
 
   return (

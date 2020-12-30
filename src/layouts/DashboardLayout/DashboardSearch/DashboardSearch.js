@@ -33,10 +33,13 @@ const DashboardSearch = ({ buscaDadosPorData }) => {
 
   const [dataInicio, setDataInicio] = useState('2020-01-01');
   const [dataFim, setDataFim] = useState('2020-12-29');
+  const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    buscaDadosPorData(dataInicio, dataFim);
+    setLoading(true);
+    await buscaDadosPorData(dataInicio, dataFim);
+    setLoading(false);
   };
 
   return (
@@ -67,7 +70,7 @@ const DashboardSearch = ({ buscaDadosPorData }) => {
               shrink: true,
             }}
           />
-          <Button type="submit" variant="outlined" color="primary">Pesquisar</Button>
+          <Button type="submit" variant="outlined" color="primary">{loading === true ? 'Carregando...' : 'Pesquisar'}</Button>
         </form>
       </Box>
     </Container>
