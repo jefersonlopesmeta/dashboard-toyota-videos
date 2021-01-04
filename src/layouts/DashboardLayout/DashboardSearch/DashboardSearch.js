@@ -47,6 +47,7 @@ const DashboardSearch = ({ buscaDadosPorData }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
     setLoading(true);
     await buscaDadosPorData(dataInicio, dataFim);
     setLoading(false);

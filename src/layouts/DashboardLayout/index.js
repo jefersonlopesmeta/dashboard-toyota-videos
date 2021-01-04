@@ -48,12 +48,12 @@ const DashboardLayout = () => {
   });
 
   const buscaDadosPorData = async (dataInicio, dataFim) => {
-    await api
-      .get(`api/homologacao/dashboard/totais/${dataInicio}/${dataFim}`)
-      .then((res) => {
-        setCardsValue(res.data);
-      })
-      .catch((error) => console.log(error));
+    return await dataInicio < dataFim
+      ? api
+        .get(`api/homologacao/dashboard/totais/${dataInicio}/${dataFim}`)
+        .then((res) => setCardsValue(res.data))
+        .catch((error) => console.log(error))
+      : alert('data inicial deve ser menor que a data final');
   };
 
   return (
