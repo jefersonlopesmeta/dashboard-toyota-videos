@@ -25,14 +25,24 @@ const useStyles = makeStyles(() => ({
   textField: {
     marginLeft: 10,
     marginRight: 10
+  },
+  flexCenter: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 }));
 
 const DashboardSearch = ({ buscaDadosPorData }) => {
   const classes = useStyles();
 
-  const [dataInicio, setDataInicio] = useState('2020-01-01');
-  const [dataFim, setDataFim] = useState('2020-12-29');
+  const ajustaData = (data) => { return data < 10 ? `0${data}` : data + 1; };
+
+  const novaData = new Date();
+  const diaAtual = `${novaData.getFullYear()}-${ajustaData(novaData.getMonth() + 1)}-${ajustaData(novaData.getDate())}`;
+  const umAnoAtras = `${novaData.getFullYear() - 1}-${ajustaData(novaData.getMonth() + 1)}-${ajustaData(novaData.getDate())}`;
+  const [dataInicio, setDataInicio] = useState(umAnoAtras);
+  const [dataFim, setDataFim] = useState(diaAtual);
   const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = async (e) => {
@@ -45,7 +55,7 @@ const DashboardSearch = ({ buscaDadosPorData }) => {
   return (
     <Container>
       <Box display="flex" alignItems="center" justifyContent="start" className={classes.boxPesquisa}>
-        <form className={classes.formPesquisa} onSubmit={(e) => handleFormSubmit(e)}>
+        <form className={`${classes.formPesquisa}, ${classes.flexCenter}`} onSubmit={(e) => handleFormSubmit(e)}>
           <TextField
             id="dataInicio"
             variant="outlined"
